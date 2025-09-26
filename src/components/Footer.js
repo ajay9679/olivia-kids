@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="w-full flex flex-col md:flex-row items-center md:items-start justify-between gap-8 px-4 sm:px-6 md:px-10">
         <div className="flex flex-col items-center md:items-start gap-2">
           <Link href="/">
-            <img src="/logo.png" alt="Olivia Kids Logo" className="h-20 w-auto mb-2" />
+            <Image width={100} height={100} src="/logo.png" alt="Olivia Kids Logo" className="h-20 w-auto mb-2" />
           </Link>
           <span className="text-lg font-bold text-pink-600">Olivia School</span>
           <span className="text-sm text-gray-500">Inspiring Young Minds</span>

@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import { supabase } from "@/app/lib/supabaseClient";
+import Image from "next/image";
 
 
 export default function EventsSection() {
@@ -37,7 +38,7 @@ export default function EventsSection() {
                 {pagedEvents.map((e, idx) => (
                     <div key={e.id || idx} className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
                         <div className="h-40 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                            <img src={e.image} alt={e.title} className="object-cover w-full h-full" />
+                            <Image width={400} height={400} quality={100} src={e.image} alt={e.title} className="object-cover "  />
                         </div>
                         <div className="p-4 flex-1 flex flex-col justify-between">
                             <div>

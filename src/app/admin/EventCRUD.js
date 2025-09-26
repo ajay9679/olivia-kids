@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/app/lib/supabaseClient";
 import toast, { Toaster } from "react-hot-toast";
+import Image from "next/image";
 
 
 export default function EventCRUD(){
@@ -234,9 +235,9 @@ export default function EventCRUD(){
                 onChange={e => setImageFile(e.target.files[0])}
               />
               {imageFile ? (
-                <img src={URL.createObjectURL(imageFile)} alt="New Preview" className="mt-2 h-20 w-32 object-cover rounded" />
+                <Image width={128} height={80} src={URL.createObjectURL(imageFile)} alt="New Preview" className="mt-2 h-20 w-32 object-cover rounded" />
               ) : (editingId && form.image && (
-                <img src={form.image} alt="Event Preview" className="mt-2 h-20 w-32 object-cover rounded" />
+                <Image width={128} height={80} src={form.image} alt="Event Preview" className="mt-2 h-20 w-32 object-cover rounded" />
               ))}
             </div>
             <button type="submit" className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition flex items-center justify-center" disabled={submitting}>
@@ -282,7 +283,7 @@ export default function EventCRUD(){
                       <td className="px-4 py-2 text-gray-700 dark:text-gray-200 max-w-xs truncate">{ev.description}</td>
                       <td className="px-4 py-2 ">
                         {ev.image && (
-                          <img src={ev.image} alt="Event" className="h-16 w-28 object-cover rounded" />
+                          <Image width={128} height={80} src={ev.image} alt="Event" className="h-16 w-28 object-cover rounded" />
                         )}
                       </td>
                       <td className="px-4 py-2 text-center flex items-center space-between">

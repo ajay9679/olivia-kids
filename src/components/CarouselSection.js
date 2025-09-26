@@ -2,6 +2,7 @@
 
 import React from "react";
 import useTypewriterCursor from "../hooks/useTypewriterCursor";
+import Image from "next/image";
 
 
 const carouselImages = [
@@ -45,7 +46,8 @@ export default function CarouselSection() {
       >
         {/* Image with fade/slide transition */}
   <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent z-10 pointer-events-none" />
-        <img
+        <Image
+          width={100} height={100}
           src={carouselImages[current].src}
           alt={carouselImages[current].caption}
           className="w-full h-full object-cover transition-all duration-700 ease-in-out"

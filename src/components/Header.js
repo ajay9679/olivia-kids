@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
@@ -11,18 +12,20 @@ export default function Header() {
   const sentinelRef = useRef(null);
 
   useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => {
-        setIsSticky(!entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-    if (sentinelRef.current) {
-      observer.observe(sentinelRef.current);
-    }
-    return () => {
-      if (sentinelRef.current) observer.unobserve(sentinelRef.current);
-    };
+  const sentinel = sentinelRef.current;
+  const observer = new window.IntersectionObserver(
+    ([entry]) => {
+      setIsSticky(!entry.isIntersecting);
+    },
+    { threshold: 0 }
+  );
+  if (sentinel) {
+    observer.observe(sentinel);
+  }
+  return () => {
+    if (sentinel) observer.unobserve(sentinel);
+    observer.disconnect();
+  };
   }, []);
 
   // Close menu on navigation
@@ -42,7 +45,7 @@ export default function Header() {
         <nav className="max-w-6xl mx-auto flex items-center justify-between py-2 px-2 sm:py-4 sm:px-6">
           <Link href="/">
             <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="Olivia Kids Logo" className="h-14 sm:h-20 w-auto -my-2 sm:-my-4" style={{ maxHeight: '80px' }} />
+              <Image width={100} height={100} src="/logo.png" alt="Olivia Kids Logo" className="h-14 sm:h-20 w-auto -my-2 sm:-my-4" style={{ maxHeight: '80px' }} />
               <span className="text-xs bg-pink-200 text-pink-700 px-2 py-1 rounded-full ml-2">School</span>
             </div>
           </Link>

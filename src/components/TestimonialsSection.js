@@ -23,6 +23,7 @@ const testimonials = [
 ];
 
 
+import Image from "next/image";
 import React, { useState } from "react";
 
 export default function TestimonialsSection() {
@@ -41,12 +42,13 @@ export default function TestimonialsSection() {
           style={{ minWidth: 40 }}
         >&#8592;</button>
         <div className="bg-white rounded-2xl shadow-xl px-8 py-8 flex flex-col items-center w-full mx-8 sm:mx-0">
-          <img
+          <Image
+            width={100} height={100}
             src={testimonials[current].img}
             alt={testimonials[current].name}
             className="w-20 h-20 rounded-full object-cover border-4 border-pink-200 mb-4 shadow"
           />
-          <p className="italic text-gray-700 text-lg text-center mb-4">"{testimonials[current].text}"</p>
+          <p className="italic text-gray-700 text-lg text-center mb-4">&quot;{testimonials[current].text}&quot;</p>
           <div className="text-pink-700 font-bold text-base text-center">- {testimonials[current].name}</div>
         </div>
         <button

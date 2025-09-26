@@ -75,6 +75,7 @@ const galleryImages = [
   },
 ];
 
+import Image from "next/image";
 import React, { useState } from "react";
 
 export default function GallerySection() {
@@ -101,9 +102,12 @@ export default function GallerySection() {
             style={{ height: img.tall ? '320px' : '200px' }}
             onClick={() => openLightbox(idx)}
           >
-            <img
+            
+            <Image
               src={img.src}
               alt={img.alt}
+              width={400}
+              height={img.tall ? 320 : 200}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ minHeight: '100%', maxHeight: '100%' }}
             />
@@ -135,7 +139,7 @@ export default function GallerySection() {
             &#8592;
           </button>
           <div className="max-w-3xl w-full flex flex-col items-center">
-            <img
+            <Image
               src={galleryImages[lightboxIdx].src}
               alt={galleryImages[lightboxIdx].alt}
               className="rounded-xl shadow-2xl w-full max-h-[70vh] object-contain"
