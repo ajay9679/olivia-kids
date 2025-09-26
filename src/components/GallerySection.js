@@ -50,7 +50,7 @@ const galleryImages = [
     tall: true,
   },
   {
-    src: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+    src: "https://ik.imagekit.io/ekleesk3b0h/olivia-kids/IMG_20250805_112411103_HDR_AE__Q0sq-LJT.jpg?updatedAt=1758861389599",
     alt: "Kids doing science experiment",
     title: "Science Project",
     tall: false,
@@ -62,13 +62,13 @@ const galleryImages = [
     tall: true,
   },
   {
-    src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
+    src: "https://ik.imagekit.io/ekleesk3b0h/olivia-kids/IMG_20250805_111858138_HDR_AE_H-Sd7HE4q.jpg?updatedAt=1758861361073",
     alt: "Group of friends smiling outdoors",
     title: "Friendship & Smiles",
     tall: false,
   },
   {
-    src: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+    src: "https://ik.imagekit.io/ekleesk3b0h/olivia-kids/IMG_3421_VnKU9aeMF.JPG?updatedAt=1758861677863",
     alt: "Kids reading books together",
     title: "Reading Time",
     tall: true,
@@ -107,8 +107,9 @@ export default function GallerySection() {
               src={img.src}
               alt={img.alt}
               width={400}
+              quality={100}
               height={img.tall ? 320 : 200}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
               style={{ minHeight: '100%', maxHeight: '100%' }}
             />
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -140,6 +141,7 @@ export default function GallerySection() {
           </button>
           <div className="max-w-3xl w-full flex flex-col items-center">
             <Image
+              width={800} height={600} quality={100}
               src={galleryImages[lightboxIdx].src}
               alt={galleryImages[lightboxIdx].alt}
               className="rounded-xl shadow-2xl w-full max-h-[70vh] object-contain"
