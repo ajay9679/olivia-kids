@@ -3,22 +3,22 @@ const testimonials = [
   {
     name: "Aarav's Parent",
     text: "Olivia Kids School has transformed my child's learning experience. The teachers are caring and the activities are so creative!",
-    img: "https://randomuser.me/api/portraits/men/32.jpg",
+    img: "https://ik.imagekit.io/ekleesk3b0h/olivia-kids/blank%20avatar/avatar_KeIvCD0_u.jpg?updatedAt=1758860359833",
   },
   {
     name: "Priya's Parent",
     text: "We love the vibrant community and the focus on holistic development. Highly recommended!",
-    img: "https://randomuser.me/api/portraits/women/44.jpg",
+    img: "https://ik.imagekit.io/ekleesk3b0h/olivia-kids/blank%20avatar/avatar_KeIvCD0_u.jpg?updatedAt=1758860359833",
   },
   {
     name: "Rohan's Parent",
     text: "My son looks forward to school every day. The programs are fun and educational!",
-    img: "https://randomuser.me/api/portraits/men/65.jpg",
+    img: "https://ik.imagekit.io/ekleesk3b0h/olivia-kids/blank%20avatar/avatar_KeIvCD0_u.jpg?updatedAt=1758860359833",
   },
   {
     name: "Maya's Parent",
     text: "The school environment is so positive and nurturing. My daughter has grown so much in confidence!",
-    img: "https://randomuser.me/api/portraits/women/68.jpg",
+    img: "https://ik.imagekit.io/ekleesk3b0h/olivia-kids/blank%20avatar/avatar_KeIvCD0_u.jpg?updatedAt=1758860359833",
   },
 ];
 
