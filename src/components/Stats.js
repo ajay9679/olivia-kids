@@ -12,8 +12,7 @@ export default function Stats() {
         </div>
         <div className="flex flex-col items-center">
           <span className="text-4xl sm:text-5xl font-extrabold text-pink-600 mb-2">
-            2.5K
-            <span className="text-4xl sm:text-5xl font-extrabold align-top" style={{ lineHeight: 1 }} >+</span>
+            <AnimatedNumber value={2500} suffix="+" />
           </span>
           <span className="text-lg font-semibold text-gray-700">Students</span>
         </div>
