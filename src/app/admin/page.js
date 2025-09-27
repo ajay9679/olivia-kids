@@ -34,6 +34,19 @@ export default function AdminDashboard() {
     []
   );
 
+  const table = useReactTable({
+    data: students,
+    columns,
+    state: { globalFilter },
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: "includesString",
+    debugTable: false,
+  });
+
     useEffect(() => {
         if (status === "unauthenticated") {
             router.replace("/login");
@@ -62,18 +75,7 @@ export default function AdminDashboard() {
     return null; // Don't render anything while redirecting
   }
 
-  const table = useReactTable({
-    data: students,
-    columns,
-    state: { globalFilter },
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: "includesString",
-    debugTable: false,
-  });
+  
 
   // Example data for visualization
   const stats = [
