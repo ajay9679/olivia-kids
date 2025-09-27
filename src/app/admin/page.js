@@ -62,7 +62,7 @@ export default function AdminDashboard() {
         setLoading(false);
       }
       fetchStudents();
-    }
+    } 
   }, [status, router]);
   if (status === "loading") {
     return (

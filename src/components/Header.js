@@ -46,7 +46,7 @@ export default function Header() {
           <Link href="/">
             <div className="flex items-center gap-2">
               <Image width={100} height={100} src="/logo.png" alt="Olivia Kids Logo" className="h-14 sm:h-20 w-auto -my-2 sm:-my-4" style={{ maxHeight: '80px' }} />
-              <span className="text-xs bg-pink-200 text-pink-700 px-2 py-1 rounded-full ml-2">School</span>
+              <span className="text-xs bg-pink-200 text-pink-700 px-2 py-1 rounded-full ml-2">Olivia Enlightened English School</span>
             </div>
           </Link>
           {/* Hamburger for mobile/tablet */}
