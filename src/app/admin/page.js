@@ -24,6 +24,16 @@ export default function AdminDashboard() {
     const [loading, setLoading] = useState(true);
     const [globalFilter, setGlobalFilter] = useState("");
 
+    const columns = useMemo(
+    () => [
+      { accessorKey: "id", header: "ID" },
+      { accessorKey: "name", header: "Name" },
+      { accessorKey: "email", header: "Email" },
+      { accessorKey: "status", header: "Status" },
+    ],
+    []
+  );
+
     useEffect(() => {
         if (status === "unauthenticated") {
             router.replace("/login");
@@ -51,14 +61,6 @@ export default function AdminDashboard() {
   if (status === "unauthenticated") {
     return null; // Don't render anything while redirecting
   }
-
-    const columns = useMemo(
-    () => [
-        { accessorKey: "id", header: "ID" },
-        { accessorKey: "name", header: "Name" },
-        { accessorKey: "email", header: "Email" },
-        { accessorKey: "status", header: "Status" },
-    ],[]);
 
   const table = useReactTable({
     data: students,
