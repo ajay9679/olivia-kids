@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useMemo, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAdminDarkMode } from "./AdminLayoutClient";
 
 import { supabase } from "@/app/lib/supabaseClient";
@@ -16,31 +17,48 @@ import {
 } from "@tanstack/react-table";
 
 export default function AdminDashboard() {
-  const { dark, setDark } = useAdminDarkMode();
-  const { data: session } = useSession();
-  const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [globalFilter, setGlobalFilter] = useState("");
+    const { data: session, status } = useSession();
+    const router = useRouter();
+    const { dark, setDark } = useAdminDarkMode();
+    const [students, setStudents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [globalFilter, setGlobalFilter] = useState("");
 
-  useEffect(() => {
-    async function fetchStudents() {
-      setLoading(true);
-      const { data, error } = await supabase.from("students").select("id, name, email, status");
-      if (!error) setStudents(data);
-      setLoading(false);
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.replace("/login");
+            return;
+        }
+    if (status === "authenticated") {
+        async function fetchStudents() {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from("students")
+          .select("id, name, email, status");
+        if (!error) setStudents(data || []);
+        setLoading(false);
+      }
+      fetchStudents();
     }
-    fetchStudents();
-  }, []);
+  }, [status, router]);
+  if (status === "loading") {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <span className="text-lg font-semibold">Loading...</span>
+      </div>
+    );
+  }
+  if (status === "unauthenticated") {
+    return null; // Don't render anything while redirecting
+  }
 
-  const columns = useMemo(
+    const columns = useMemo(
     () => [
-      { accessorKey: "id", header: "ID" },
-      { accessorKey: "name", header: "Name" },
-      { accessorKey: "email", header: "Email" },
-      { accessorKey: "status", header: "Status" },
-    ],
-    []
-  );
+        { accessorKey: "id", header: "ID" },
+        { accessorKey: "name", header: "Name" },
+        { accessorKey: "email", header: "Email" },
+        { accessorKey: "status", header: "Status" },
+    ],[]);
 
   const table = useReactTable({
     data: students,

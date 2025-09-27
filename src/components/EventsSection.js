@@ -16,7 +16,7 @@ export default function EventsSection() {
     useEffect(() => {
         async function fetchEvents(){
             setLoading(true);
-            const { data, error } = await supabase.from("events").select("*").order('date', { ascending: true });
+            const { data, error } = await supabase.from("events").select("*").order('created_at', { ascending: true });
             if(!error && data) setEvents(data);
             setLoading(false);
         }
@@ -38,12 +38,12 @@ export default function EventsSection() {
                 {pagedEvents.map((e, idx) => (
                     <div key={e.id || idx} className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
                         <div className="h-40 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
-                            <Image width={400} height={400} quality={100} src={e.image} alt={e.title} className="object-cover "  />
+                            <Image width={400} height={400} quality={100} src={e.image} alt={e.title} className="object-cover " />
                         </div>
                         <div className="p-4 flex-1 flex flex-col justify-between">
                             <div>
                                 <div className="text-pink-600 font-bold mb-1 text-sm">{new Date(e.date).toLocaleDateString()}</div>
-                                <div className="font-semibold text-blue-700 text-lg mb-1">{e.title.toUpperCase()}</div>
+                                <div className="font-semibold text-violet-700 tracking-wider text-p-700 italic text-sm mb-1">{e.title.toUpperCase()}</div>
                                 <div className="text-gray-700 text-sm">{e.description || e.desc}</div>
                                 <div className="text-xs text-gray-500 mt-2 flex gap-2"><span className="font-semibold">Venue | </span><span className="bg-green-500 px-2 text-[10px] text-center text-stone-200 rounded-full flex justify-center items-center">{e.venue}</span></div>
                             </div>

@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { supabase } from "@/app/lib/supabaseClient";
 
 export const authOptions = {
   providers: [
@@ -11,38 +10,63 @@ export const authOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        const { email, password } = credentials;
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
-        if (error || !data.user) {
-          return null;
-        }
-        return { id: data.user.id, email: data.user.email, role: data.user.role };
+  // Step 1: Get JWT from Supabase
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/token?grant_type=password`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    }
+  );
+  const data = await res.json();
+  console.log("Supabase Auth Response:", data);
+
+  if (data.error) {
+    throw new Error(data.error_description || "Invalid credentials");
+  }
+
+  // Step 2: Use JWT to fetch user profile
+  if (data.access_token) {
+    const profileRes = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/user`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${data.access_token}`,
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+        },
       }
+    );
+    const profile = await profileRes.json();
+    if (profile && profile.id) {
+      return { id: profile.id, email: profile.email };
+    }
+  }
+  return null;
+}
     })
   ],
-  session: {
-    strategy: "jwt"
-  },
+  session: { strategy: "jwt" },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.role = user.role;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({session, token}){
       session.user.id = token.id;
-      session.user.role = token.role;
       return session;
     }
   },
-  pages: {
-    signIn: "/login"
-  }
+  pages: { signIn: "/login" }
 };
 
 const handler = NextAuth(authOptions);
