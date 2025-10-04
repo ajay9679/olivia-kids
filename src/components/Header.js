@@ -23,7 +23,7 @@ export default function Header() {
     observer.observe(sentinel);
   }
   return () => {
-    if (sentinel) observer.unobserve(sentinel);
+    if(sentinel) observer.unobserve(sentinel);
     observer.disconnect();
   };
   }, []);
